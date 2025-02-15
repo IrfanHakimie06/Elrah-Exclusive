@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elrah Exclusive - Kedai Baju Melayu</title>
+</head>
+<body>
+    <h2>Selamat Datang ke Elrah Exclusive</h2>
+    
+    <label for="item">Pilih Item:</label>
+    <select id="item">
+        <option value="Baju Melayu" data-price="199">Baju Melayu - RM199</option>
+        <option value="Baju Melayu Teluk Belanga" data-price="199">Baju Melayu Teluk Belanga - RM199</option>
+        <option value="Kurta" data-price="119">Kurta - RM119</option>
+    </select><br><br>
+
+    <label for="color">Pilih Warna:</label>
+    <select id="color">
+        <option value="Burgundy">Burgundy</option>
+        <option value="Maroon">Maroon</option>
+        <option value="Black">Black</option>
+        <option value="Offwhite">Offwhite</option>
+        <option value="Grey">Grey</option>
+        <option value="Light Grey">Light Grey</option>
+        <option value="Dark Grey">Dark Grey</option>
+        <option value="Ash Grey">Ash Grey</option>
+        <option value="Emerald Green">Emerald Green</option>
+        <option value="Sage Green">Sage Green</option>
+        <option value="Dusty Green">Dusty Green</option>
+        <option value="Royal Blue">Royal Blue</option>
+        <option value="Navy Blue">Navy Blue</option>
+        <option value="Baby Blue">Baby Blue</option>
+        <option value="Turquoise">Turquoise</option>
+        <option value="Heart Red">Heart Red</option>
+        <option value="Red">Red</option>
+        <option value="Hot Pink">Hot Pink</option>
+        <option value="Pink">Pink</option>
+        <option value="Brick Orange">Brick Orange</option>
+        <option value="Burnt Orange">Burnt Orange</option>
+        <option value="Orange">Orange</option>
+        <option value="Yellow">Yellow</option>
+        <option value="Peach Yellow">Peach Yellow</option>
+        <option value="Lilac">Lilac</option>
+        <option value="Purple">Purple</option>
+        <option value="Dusty Purple">Dusty Purple</option>
+        <option value="Dusty Pink">Dusty Pink</option>
+        <option value="Baby Pink">Baby Pink</option>
+        <option value="Soft Green">Soft Green</option>
+    </select><br><br>
+
+    <label for="size">Pilih Saiz:</label>
+    <select id="size">
+        <option value="XXS">XXS</option>
+        <option value="XS">XS</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+        <option value="XXXL">XXXL</option>
+    </select><br><br>
+
+    <label for="quantity">Kuantiti (Maksimum 10):</label>
+    <input type="number" id="quantity" min="1" max="10" value="1"><br><br>
+
+    <label for="sampin">Tambah Sampin (+RM79)?</label>
+    <input type="checkbox" id="sampin"><br><br>
+
+    <button onclick="kiraHarga()">Kira Harga & Dapatkan Resit</button>
+
+    <h3>Resit Pembelian:</h3>
+    <p id="receipt"></p>
+
+    <script>
+        function kiraHarga() {
+            var itemElement = document.getElementById("item");
+            var selectedItem = itemElement.value;
+            var selectedPrice = parseInt(itemElement.options[itemElement.selectedIndex].getAttribute("data-price"));
+
+            var selectedColor = document.getElementById("color").value;
+            var selectedSize = document.getElementById("size").value;
+            var quantity = parseInt(document.getElementById("quantity").value);
+            var addSampin = document.getElementById("sampin").checked;
+            
+            if (quantity < 1 || quantity > 10) {
+                alert("Kuantiti mesti antara 1 hingga 10!");
+                return;
+            }
+
+            var sampinPrice = addSampin ? 79 : 0;
+            var totalPrice = (selectedPrice + sampinPrice) * quantity;
+
+            document.getElementById("receipt").innerHTML = `
+                <strong>Item:</strong> ${selectedItem}<br>
+                <strong>Warna:</strong> ${selectedColor}<br>
+                <strong>Saiz:</strong> ${selectedSize}<br>
+                <strong>Kuantiti:</strong> ${quantity}<br>
+                <strong>Sampin:</strong> ${addSampin ? "Ya (+RM79)" : "Tidak"}<br>
+                <h3><strong>Total Harga:</strong> RM${totalPrice}</h3>
+            `;
+        }
+    </script>
+</body>
+</html>
